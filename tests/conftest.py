@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+
 import pytest
 
 
@@ -13,7 +14,6 @@ TASKI_DOMAIN_KEY = 'taski_domain'
 DOCKERFILE_NAME = 'Dockerfile'
 DOCKERHUB_USERNAME_KEY = 'dockerhub_username'
 WORKFLOW_FILE = 'kittygram_workflow.yml'
-DOCKER_COMPOSE_PROD_FILE_NAME = 'docker-compose.production.yml'
 
 for dir_name in (BACKEND_DIR_NAME, FRONTEND_DIR_NAME, NGINX_DIR_NAME):
     path_to_dir = BASE_DIR / dir_name
@@ -26,7 +26,7 @@ for dir_name in (BACKEND_DIR_NAME, FRONTEND_DIR_NAME, NGINX_DIR_NAME):
 
 @pytest.fixture(scope='session')
 def backend_dir_info() -> tuple[Path, str]:
-    return BASE_DIR / BACKEND_DIR_NAME, BACKEND_DIR_NAME
+    return (BASE_DIR / BACKEND_DIR_NAME, BACKEND_DIR_NAME)
 
 
 @pytest.fixture(scope='session')
@@ -36,7 +36,7 @@ def dockerfile_name() -> str:
 
 @pytest.fixture(scope='session')
 def nginx_dir_info() -> tuple[Path, str]:
-    return BASE_DIR / NGINX_DIR_NAME, NGINX_DIR_NAME
+    return (BASE_DIR / NGINX_DIR_NAME, NGINX_DIR_NAME)
 
 
 @pytest.fixture(scope='session')
@@ -59,11 +59,6 @@ def workflow_file_name() -> str:
     return WORKFLOW_FILE
 
 
-@pytest.fixture
-def docker_compose_prod_file_name() -> str:
-    return DOCKER_COMPOSE_PROD_FILE_NAME
-
-
 @pytest.fixture(scope='session')
 def deploy_file_info() -> tuple[Path, str]:
     deploy_info_file = BASE_DIR / DEPLOY_INFO_FILE_NAME
@@ -71,13 +66,13 @@ def deploy_file_info() -> tuple[Path, str]:
         f'Убедитесь, что в корневой директории проекта создан файл '
         f'`{DEPLOY_INFO_FILE_NAME}`'
     )
-    return deploy_info_file, DEPLOY_INFO_FILE_NAME
+    return (deploy_info_file, DEPLOY_INFO_FILE_NAME)
 
 
 @pytest.fixture(scope='session')
 def deploy_info_file_content(
         deploy_file_info: tuple[Path, str]
-) -> dict[str, str]:
+        ) -> dict[str, str]:
     path, relative_path = deploy_file_info
     with open(path, 'r', encoding='utf-8', errors='ignore') as f:
         file_content = {}
@@ -114,7 +109,7 @@ def link_key(request) -> str:
 
 @pytest.fixture(scope='session')
 def link_keys() -> tuple[str, str]:
-    return KITTYGRAM_DOMAIN_KEY, TASKI_DOMAIN_KEY
+    return (KITTYGRAM_DOMAIN_KEY, TASKI_DOMAIN_KEY)
 
 
 @pytest.fixture(scope='session')
