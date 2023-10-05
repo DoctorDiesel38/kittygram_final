@@ -1,6 +1,7 @@
 import re
-from pathlib import Path
 import pytest
+
+from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
