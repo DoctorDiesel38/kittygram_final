@@ -1,8 +1,6 @@
 import re
 import pytest
-
 from pathlib import Path
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 BACKEND_DIR_NAME = 'backend'
@@ -27,7 +25,7 @@ for dir_name in (BACKEND_DIR_NAME, FRONTEND_DIR_NAME, NGINX_DIR_NAME):
 
 @pytest.fixture(scope='session')
 def backend_dir_info() -> tuple[Path, str]:
-    return (BASE_DIR / BACKEND_DIR_NAME, BACKEND_DIR_NAME)
+    return BASE_DIR / BACKEND_DIR_NAME, BACKEND_DIR_NAME
 
 
 @pytest.fixture(scope='session')
@@ -37,7 +35,7 @@ def dockerfile_name() -> str:
 
 @pytest.fixture(scope='session')
 def nginx_dir_info() -> tuple[Path, str]:
-    return (BASE_DIR / NGINX_DIR_NAME, NGINX_DIR_NAME)
+    return BASE_DIR / NGINX_DIR_NAME, NGINX_DIR_NAME
 
 
 @pytest.fixture(scope='session')
@@ -72,7 +70,7 @@ def deploy_file_info() -> tuple[Path, str]:
         f'Убедитесь, что в корневой директории проекта создан файл '
         f'`{DEPLOY_INFO_FILE_NAME}`'
     )
-    return (deploy_info_file, DEPLOY_INFO_FILE_NAME)
+    return deploy_info_file, DEPLOY_INFO_FILE_NAME
 
 
 @pytest.fixture(scope='session')
@@ -115,7 +113,7 @@ def link_key(request) -> str:
 
 @pytest.fixture(scope='session')
 def link_keys() -> tuple[str, str]:
-    return (KITTYGRAM_DOMAIN_KEY, TASKI_DOMAIN_KEY)
+    return KITTYGRAM_DOMAIN_KEY, TASKI_DOMAIN_KEY
 
 
 @pytest.fixture(scope='session')
